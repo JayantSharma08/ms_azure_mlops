@@ -68,9 +68,17 @@ jobs:
 
       - name: Deploy model to managed online endpoint
         id: deploy
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ steps.detect.outputs.subscription_id }}
         run: |
+          # Guard: fail fast if the subscription ID didn't propagate
+          if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
+            echo "AZURE_SUBSCRIPTION_ID is empty — detect step output did not propagate." >&2
+            exit 1
+          fi
+          
           python src/deploy_to_online_endpoint.py \
-            --subscription-id "${{ steps.detect.outputs.subscription_id }}" \
+            --subscription-id "$AZURE_SUBSCRIPTION_ID" \
             --resource-group "${{ steps.detect.outputs.resource_group }}" \
             --workspace "${{ steps.detect.outputs.workspace }}" \
             --endpoint-name "diabetes-endpoint" \
