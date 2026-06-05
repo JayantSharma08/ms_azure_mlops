@@ -56,7 +56,7 @@ jobs:
           fi
 
           SUBSCRIPTION_ID=$(az account show --query id -o tsv)
-          
+
           echo "Detected subscription_id=$SUBSCRIPTION_ID"
           if [ -z "$SUBSCRIPTION_ID" ]; then
             echo "No subscription detected. Ensure 'azure/login' succeeded and secrets are available." >&2
