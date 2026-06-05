@@ -21,7 +21,6 @@ def parse_args():
 
 
 def get_ml_client(subscription_id: str, resource_group: str, workspace: str) -> MLClient:
-    logging.getLogger("azure.core.pipeline.policies.http_logging_policy").setLevel(logging.DEBUG)
     credential = DefaultAzureCredential()
     return MLClient(
         credential=credential,
@@ -106,6 +105,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-
     main()
