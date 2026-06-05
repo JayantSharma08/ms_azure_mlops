@@ -2,6 +2,7 @@ from azure.identity import DefaultAzureCredential
 from azure.ai.ml import MLClient
 from azure.ai.ml.entities import ManagedOnlineEndpoint, ManagedOnlineDeployment, Model
 from azure.ai.ml.constants import AssetTypes
+import logging
 
 import argparse
 import datetime
@@ -20,6 +21,7 @@ def parse_args():
 
 
 def get_ml_client(subscription_id: str, resource_group: str, workspace: str) -> MLClient:
+    logging.getLogger("azure.core.pipeline.policies.http_logging_policy").setLevel(logging.DEBUG)
     credential = DefaultAzureCredential()
     return MLClient(
         credential=credential,
@@ -104,4 +106,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG)
+
     main()
