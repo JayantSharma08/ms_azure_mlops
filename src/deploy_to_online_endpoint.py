@@ -106,9 +106,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    http_logger = logging.getLogger("azure.core.pipeline.policies.http_logging_policy")
-    http_logger.setLevel(logging.DEBUG)
-    handler = logging.StreamHandler()
-    handler.setLevel(logging.DEBUG)
-    http_logger.addHandler(handler)
+    # http_logger = logging.getLogger("azure.core.pipeline.policies.http_logging_policy")
+    # http_logger.setLevel(logging.DEBUG)
+    # handler = logging.StreamHandler()
+    # handler.setLevel(logging.DEBUG)
+    # http_logger.addHandler(handler)
     main()
