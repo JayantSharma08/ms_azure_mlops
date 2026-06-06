@@ -67,16 +67,16 @@ jobs:
           echo "workspace=$WS_NAME" >> "$GITHUB_OUTPUT"
           echo "subscription_id=$SUBSCRIPTION_ID" >> "$GITHUB_OUTPUT"
 
-      # - name: Verify resource provider registration
-      #   run: |
-      #     STATE=$(az provider show \
-      #       --namespace Microsoft.MachineLearningServices \
-      #       --query registrationState -o tsv)
-      #     echo "Provider state: $STATE"
-      #     if [ "$STATE" != "Registered" ]; then
-      #       echo "Registering provider..."
-      #       az provider register --namespace Microsoft.MachineLearningServices --wait
-      #     fi
+      - name: Verify resource provider registration
+        run: |
+          STATE=$(az provider show \
+            --namespace Microsoft.MachineLearningServices \
+            --query registrationState -o tsv)
+          echo "Provider state: $STATE"
+          if [ "$STATE" != "Registered" ]; then
+            echo "Registering provider..."
+            az provider register --namespace Microsoft.MachineLearningServices --wait
+          fi
 
       - name: Deploy model to managed online endpoint
         id: deploy
