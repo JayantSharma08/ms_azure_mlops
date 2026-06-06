@@ -1,4 +1,4 @@
-from azure.identity import DefaultAzureCredential, AzureCliCredential
+from azure.identity import DefaultAzureCredential
 from azure.ai.ml import MLClient
 from azure.ai.ml.entities import ManagedOnlineEndpoint, ManagedOnlineDeployment, Model
 from azure.ai.ml.constants import AssetTypes
@@ -21,8 +21,8 @@ def parse_args():
 
 
 def get_ml_client(subscription_id: str, resource_group: str, workspace: str) -> MLClient:
-    # credential = DefaultAzureCredential()
-    credential = AzureCliCredential()
+    credential = DefaultAzureCredential()
+    # credential = AzureCliCredential()
     return MLClient(
         credential=credential,
         subscription_id=subscription_id,
